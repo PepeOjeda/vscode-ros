@@ -7,6 +7,7 @@ import * as vscode from "vscode";
 import * as extension from "../extension";
 import * as telemetry from "../telemetry-helper";
 import { rosApi } from "./ros"
+import { LaunchResolver } from "../debugger/configuration/resolvers/ros1/launch";
 
 export async function rosrun(context: vscode.ExtensionContext) {
     const reporter = telemetry.getReporter();
@@ -48,6 +49,13 @@ export async function roslaunch(context: vscode.ExtensionContext) {
         return;
     }
     terminal.show();
+}
+
+export async function stopLaunched(context: vscode.ExtensionContext) {
+    const reporter = telemetry.getReporter();
+    reporter.sendTelemetryCommand(extension.Commands.StopLaunchedNodes);
+
+    LaunchResolver.stopLaunchedNodes();
 }
 
 async function prepareroslaunch(): Promise<vscode.Terminal> {

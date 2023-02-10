@@ -63,6 +63,7 @@ export enum Commands {
     GetDebugSettings = "ros.getDebugSettings",
     Rosrun = "ros.rosrun",
     Roslaunch = "ros.roslaunch",
+    StopLaunchedNodes="ros.stopLaunched",
     Rostest = "ros.rostest",
     Rosdep = "ros.rosdep",
     ShowCoreStatus = "ros.showCoreStatus",
@@ -217,6 +218,11 @@ async function activateEnvironment(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand(Commands.Roslaunch, () => {
             ensureErrorMessageOnException(() => {
                 return ros_cli.roslaunch(context);
+            });
+        }),
+        vscode.commands.registerCommand(Commands.StopLaunchedNodes, () => {
+            ensureErrorMessageOnException(() => {
+                return ros_cli.stopLaunched(context);
             });
         }),
         vscode.commands.registerCommand(Commands.Rostest, () => {

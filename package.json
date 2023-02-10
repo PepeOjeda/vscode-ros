@@ -1,5 +1,5 @@
 {
-    "name": "vscode-ros",
+    "name": "my-vscode-ros",
     "version": "0.9.0",
     "publisher": "ms-iot",
     "engines": {
@@ -110,6 +110,11 @@
             {
                 "command": "ros.rosdep",
                 "title": "Install ROS Dependencies for this workspace using rosdep",
+                "category": "ROS"
+            },
+            {
+                "command": "ros.stopLaunched",
+                "title": "Stop all previously launched nodes",
                 "category": "ROS"
             }
         ],

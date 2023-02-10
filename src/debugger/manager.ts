@@ -13,7 +13,7 @@ import * as extension from "../extension";
 class RosDebugManager implements vscode.DebugConfigurationProvider {
     private configProvider: ros_provider.RosDebugConfigurationProvider;
     private attachResolver: attach_resolver.AttachResolver;
-    private ros1LaunchResolver: ros1_launch_resolver.LaunchResolver;
+    public ros1LaunchResolver: ros1_launch_resolver.LaunchResolver;
     private ros2LaunchResolver: ros2_launch_resolver.LaunchResolver;
 
     constructor() {

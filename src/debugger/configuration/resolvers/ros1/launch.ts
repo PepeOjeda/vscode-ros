@@ -17,7 +17,6 @@ import * as requests from "../../../requests";
 import * as utils from "../../../utils";
 import { rosApi } from "../../../../ros/ros";
 import { env } from "../../../../extension";
-
 const promisifiedExec = util.promisify(child_process.exec);
 
 interface ILaunchRequest {
@@ -34,6 +33,8 @@ interface ILaunchRequest {
 }
 
 export class LaunchResolver implements vscode.DebugConfigurationProvider {
+    public static launchedNodesPID:Array<number> = [];//gets filled when you do a launch request. It exists so you can stop the nodes again
+
     // tslint:disable-next-line: max-line-length
     public async resolveDebugConfigurationWithSubstitutedVariables(folder: vscode.WorkspaceFolder | undefined, config: requests.ILaunchRequest, token?: vscode.CancellationToken) {
         if (!path.isAbsolute(config.target) || (path.extname(config.target) !== ".launch" && path.extname(config.target) !== ".test")) {
@@ -113,20 +114,28 @@ export class LaunchResolver implements vscode.DebugConfigurationProvider {
                 if (launchRequest != null) {
                   this.executeLaunchRequest(launchRequest, false);
                 } else {
-                    const process = child_process.exec(command.stdout, rosExecOptions, (err, out) => {
+                    const process = child_process.exec(command.stdout, rosExecOptions, (err, out) => { //here!!! if you keep track of these processes as you spawn them it should be possible to stop all of them at once
                         if (err) {
                             throw (new Error(`Error from ${command.stdout}:\r\n ${err}`));
                         }
                     })
+                    if(process.pid)
+                        LaunchResolver.launchedNodesPID.push(process.pid);
                 }
             });
         });
         // @todo: error handling for Promise.all
-
+        
+        LaunchResolver.launchedNodesPID.forEach( node => vscode.window.showInformationMessage(node.toString()) );
         // Return null as we have spawned new debug requests
         return null;
     }
 
+    public static stopLaunchedNodes() : void
+    {
+        LaunchResolver.launchedNodesPID.forEach(pid => child_process.exec(`kill $(ps -o pid= --ppid ${pid})`) );
+        LaunchResolver.launchedNodesPID = [];
+    }
 
     private generateLaunchRequest(nodeName: string, command: string, config: requests.ILaunchRequest): ILaunchRequest {
         let parsedArgs: shell_quote.ParseEntry[];
