@@ -33,7 +33,7 @@ interface ILaunchRequest {
 }
 
 export class LaunchResolver implements vscode.DebugConfigurationProvider {
-    public static launchedNodesPID:Array<number> = [];//gets filled when you do a launch request. It exists so you can stop the nodes again
+    public launchedNodesPID:Array<number> = [];//gets filled when you do a launch request. It exists so you can stop the nodes again
 
     // tslint:disable-next-line: max-line-length
     public async resolveDebugConfigurationWithSubstitutedVariables(folder: vscode.WorkspaceFolder | undefined, config: requests.ILaunchRequest, token?: vscode.CancellationToken) {
@@ -104,6 +104,7 @@ export class LaunchResolver implements vscode.DebugConfigurationProvider {
         } else if (result.stdout.length == 0) {
             throw (new Error(`roslaunch unexpectedly produced no output, please test by running \"roslaunch --dump-params ${config.target} ${configArgs}\" in a ros terminal.`));
         }
+        
 
         const nodes = result.stdout.trim().split(os.EOL);
         await Promise.all(nodes.map((node: string) => {
@@ -114,27 +115,26 @@ export class LaunchResolver implements vscode.DebugConfigurationProvider {
                 if (launchRequest != null) {
                   this.executeLaunchRequest(launchRequest, false);
                 } else {
-                    const process = child_process.exec(command.stdout, rosExecOptions, (err, out) => { //here!!! if you keep track of these processes as you spawn them it should be possible to stop all of them at once
+                    const process = child_process.exec(command.stdout, rosExecOptions, (err, out) => { 
                         if (err) {
                             throw (new Error(`Error from ${command.stdout}:\r\n ${err}`));
                         }
                     })
                     if(process.pid)
-                        LaunchResolver.launchedNodesPID.push(process.pid);
+                        this.launchedNodesPID.push(process.pid);
                 }
             });
         });
         // @todo: error handling for Promise.all
         
-        LaunchResolver.launchedNodesPID.forEach( node => vscode.window.showInformationMessage(node.toString()) );
         // Return null as we have spawned new debug requests
         return null;
     }
 
-    public static stopLaunchedNodes() : void
+    public stopLaunchedNodes() : void
     {
-        LaunchResolver.launchedNodesPID.forEach(pid => child_process.exec(`kill $(ps -o pid= --ppid ${pid})`) );
-        LaunchResolver.launchedNodesPID = [];
+        this.launchedNodesPID.forEach(pid => child_process.exec(`kill $(ps -o pid= --ppid ${pid})`) );
+        this.launchedNodesPID = [];
     }
 
     private generateLaunchRequest(nodeName: string, command: string, config: requests.ILaunchRequest): ILaunchRequest {

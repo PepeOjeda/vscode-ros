@@ -111,11 +111,6 @@
                 "command": "ros.rosdep",
                 "title": "Install ROS Dependencies for this workspace using rosdep",
                 "category": "ROS"
-            },
-            {
-                "command": "ros.stopLaunched",
-                "title": "Stop all previously launched nodes",
-                "category": "ROS"
             }
         ],
         "configuration": {

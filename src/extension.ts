@@ -220,11 +220,6 @@ async function activateEnvironment(context: vscode.ExtensionContext) {
                 return ros_cli.roslaunch(context);
             });
         }),
-        vscode.commands.registerCommand(Commands.StopLaunchedNodes, () => {
-            ensureErrorMessageOnException(() => {
-                return ros_cli.stopLaunched(context);
-            });
-        }),
         vscode.commands.registerCommand(Commands.Rostest, () => {
             ensureErrorMessageOnException(() => {
                 return ros_cli.rostest(context);

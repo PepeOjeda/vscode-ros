@@ -43,19 +43,12 @@ async function preparerosrun(): Promise<vscode.Terminal> {
 export async function roslaunch(context: vscode.ExtensionContext) {
     const reporter = telemetry.getReporter();
     reporter.sendTelemetryCommand(extension.Commands.Roslaunch);
-
+    
     let terminal = await prepareroslaunch();
     if (!terminal) {
         return;
     }
     terminal.show();
-}
-
-export async function stopLaunched(context: vscode.ExtensionContext) {
-    const reporter = telemetry.getReporter();
-    reporter.sendTelemetryCommand(extension.Commands.StopLaunchedNodes);
-
-    LaunchResolver.stopLaunchedNodes();
 }
 
 async function prepareroslaunch(): Promise<vscode.Terminal> {

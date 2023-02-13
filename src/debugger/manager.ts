@@ -9,6 +9,7 @@ import * as ros1_launch_resolver from "./configuration/resolvers/ros1/launch";
 import * as ros2_launch_resolver from "./configuration/resolvers/ros2/launch";
 import * as requests from "./requests";
 import * as extension from "../extension";
+import { LaunchResolver } from "./configuration/resolvers/ros1/launch";
 
 class RosDebugManager implements vscode.DebugConfigurationProvider {
     private configProvider: ros_provider.RosDebugConfigurationProvider;
@@ -32,6 +33,7 @@ class RosDebugManager implements vscode.DebugConfigurationProvider {
             return this.attachResolver.resolveDebugConfigurationWithSubstitutedVariables(folder, config as requests.IAttachRequest, token);
         } else if (config.request === "launch") {
             if ((typeof extension.env.ROS_VERSION === "undefined") || (extension.env.ROS_VERSION.trim() == "1")) {
+                vscode.debug.onDidTerminateDebugSession( (_)=> this.ros1LaunchResolver.stopLaunchedNodes() );
                 return this.ros1LaunchResolver.resolveDebugConfigurationWithSubstitutedVariables(folder, config as requests.ILaunchRequest, token);
             } else {
                 return this.ros2LaunchResolver.resolveDebugConfigurationWithSubstitutedVariables(folder, config as requests.ILaunchRequest, token);
