@@ -8,4 +8,4 @@ node_modules
 .vscode/c_cpp_properties.json
 .vscode/settings.json
 
-vscode-ros-dev.vsix
+*.vsix
