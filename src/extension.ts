@@ -63,7 +63,6 @@ export enum Commands {
     GetDebugSettings = "ros.getDebugSettings",
     Rosrun = "ros.rosrun",
     Roslaunch = "ros.roslaunch",
-    StopLaunchedNodes="ros.stopLaunched",
     Rostest = "ros.rostest",
     Rosdep = "ros.rosdep",
     ShowCoreStatus = "ros.showCoreStatus",

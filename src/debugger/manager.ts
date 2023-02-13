@@ -9,12 +9,11 @@ import * as ros1_launch_resolver from "./configuration/resolvers/ros1/launch";
 import * as ros2_launch_resolver from "./configuration/resolvers/ros2/launch";
 import * as requests from "./requests";
 import * as extension from "../extension";
-import { LaunchResolver } from "./configuration/resolvers/ros1/launch";
 
 class RosDebugManager implements vscode.DebugConfigurationProvider {
     private configProvider: ros_provider.RosDebugConfigurationProvider;
     private attachResolver: attach_resolver.AttachResolver;
-    public ros1LaunchResolver: ros1_launch_resolver.LaunchResolver;
+    private ros1LaunchResolver: ros1_launch_resolver.LaunchResolver;
     private ros2LaunchResolver: ros2_launch_resolver.LaunchResolver;
 
     constructor() {

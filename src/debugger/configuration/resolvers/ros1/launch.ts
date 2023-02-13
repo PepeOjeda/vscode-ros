@@ -17,6 +17,7 @@ import * as requests from "../../../requests";
 import * as utils from "../../../utils";
 import { rosApi } from "../../../../ros/ros";
 import { env } from "../../../../extension";
+
 const promisifiedExec = util.promisify(child_process.exec);
 
 interface ILaunchRequest {
@@ -105,7 +106,6 @@ export class LaunchResolver implements vscode.DebugConfigurationProvider {
             throw (new Error(`roslaunch unexpectedly produced no output, please test by running \"roslaunch --dump-params ${config.target} ${configArgs}\" in a ros terminal.`));
         }
         
-
         const nodes = result.stdout.trim().split(os.EOL);
         await Promise.all(nodes.map((node: string) => {
             return promisifiedExec(`roslaunch --args ${node} ${config.target} ${configArgs}`, rosExecOptions);
