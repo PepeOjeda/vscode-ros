@@ -4,7 +4,7 @@
   "configurations": [
     {
       "name": "Extension",
-      "type": "extensionHost",
+      "type": "legacy-extensionHost",
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
