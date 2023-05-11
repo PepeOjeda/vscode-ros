@@ -1,4 +1,56 @@
 # Changelog
+## 0.9.3
+zero change release to prime the pre-release channel for future test releases.
+
+## 0.9.2
+Hot fix for ROS1 Debugging
+
+## 0.9.1
+* Revert change to filter XML and YAML files from launching.
+
+## 0.9.0
+## Thank you!
+This extension has crossed an impressive milestone - 500,000 Installs! 
+
+## New Features
+* Includes the ability to debug ROS2 launch files using the new debug_launch type. 
+> Notes:
+    This only debugs the launch file itself - it does not launch any ROS nodes. 
+    If your launch file does execute code, these may launch during debugging. 
+
+* Smaller runtime, Faster Startup using WebPack
+* `.urdf` files are now processed with `xacro`
+* Fixes to ROS2 in a container
+
+## What's Changed
+* Use Webpack to reduce loading times. by @ooeygui in https://github.com/ms-iot/vscode-ros/pull/607
+* Add the python analysis paths for ROS by @dthelegend in https://github.com/ms-iot/vscode-ros/pull/795
+* Bump mocha from 9.2.2 to 10.0.0 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/717
+* Bump @vscode/debugadapter from 1.56.1 to 1.57.0 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/766
+* Update attach.js to enable pretty-printing for "ros attach" mode by @zhh2005757 in https://github.com/ms-iot/vscode-ros/pull/815
+* Bump shell-quote from 1.7.3 to 1.7.4 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/811
+* Bump tslib from 2.4.0 to 2.4.1 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/823
+* Bump @types/mocha from 9.1.1 to 10.0.0 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/802
+* Bump typescript from 4.7.4 to 4.8.4 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/794
+* Bump portfinder from 1.0.28 to 1.0.32 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/774
+* Lamadio/0.9 fixes by @ooeygui in https://github.com/ms-iot/vscode-ros/pull/898
+* Bump @types/node from 17.0.45 to 18.15.7 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/897
+* Bump ts-loader from 9.3.1 to 9.4.2 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/831
+* Feature/debug ROS 2 launch files by @ooeygui in https://github.com/ms-iot/vscode-ros/pull/900
+* Bump webpack from 5.74.0 to 5.76.3 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/896
+* Bump typescript from 4.8.4 to 5.0.2 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/893
+* Bump webpack-cli from 4.10.0 to 5.0.1 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/833
+* Bump mocha and @types/mocha by @dependabot in https://github.com/ms-iot/vscode-ros/pull/837
+* Bump tslib from 2.4.1 to 2.5.0 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/866
+* Bump @vscode/debugadapter from 1.57.0 to 1.59.0 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/867
+* Bump @types/vscode from 1.66.0 to 1.69.0 by @dependabot in https://github.com/ms-iot/vscode-ros/pull/752
+
+## New Contributors
+* @dthelegend made their first contribution in https://github.com/ms-iot/vscode-ros/pull/795
+* @zhh2005757 made their first contribution in https://github.com/ms-iot/vscode-ros/pull/815
+
+## 0.8.4
+* makes 0.8.3 public 
 
 ## 0.8.3
 * Use default workspace storage for IntelliSense db to avoid frequent writes to watched .vscode directory

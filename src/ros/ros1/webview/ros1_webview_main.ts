@@ -1,6 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 function removeAllChildElements(e) {
     while (e.firstChild) {
         e.removeChild(e.firstChild);
@@ -131,7 +130,6 @@ function initializeCoreMonitor() {
         removeAllChildElements(servicesElement);
 
         if (message.status) {
-            console.log("ROS online");
             coreStatus.textContent = "online";
 
             let parameters = JSON.parse(message.parameters);
@@ -152,7 +150,6 @@ function initializeCoreMonitor() {
             servicesElement.appendChild(generateServicesTable(systemState.services));
         }
         else {
-            console.log("ROS offline");
             coreStatus.textContent = "offline";
         }
     });
