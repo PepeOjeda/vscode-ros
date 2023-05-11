@@ -8,8 +8,8 @@
     "author": {
         "name": "Microsoft Corporation"
     },
-    "displayName": "ROS",
-    "description": "Develop Robot Operating System (ROS) with Visual Studio Code.",
+    "displayName": "ROS - forked",
+    "description": "Forked to make it so that non-debugged nodes are automatically stopped on ending the debug session.",
     "icon": "media/icon.png",
     "aiKey": "AIF-d9b70cd4-b9f9-4d70-929b-a071c400b217",
     "categories": [

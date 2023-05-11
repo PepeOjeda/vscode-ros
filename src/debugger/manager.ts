@@ -44,6 +44,7 @@ class RosDebugManager implements vscode.DebugConfigurationProvider {
                 vscode.debug.onDidTerminateDebugSession( (_)=> this.ros1LaunchResolver.stopLaunchedNodes() );
                 return this.ros1LaunchResolver.resolveDebugConfigurationWithSubstitutedVariables(folder, config as requests.ILaunchRequest, token);
             } else {
+                vscode.debug.onDidTerminateDebugSession( (_)=> this.ros2LaunchResolver.stopLaunchedNodes() );
                 return this.ros2LaunchResolver.resolveDebugConfigurationWithSubstitutedVariables(folder, config as requests.ILaunchRequest, token);
             }
         }

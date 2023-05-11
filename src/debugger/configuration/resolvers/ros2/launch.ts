@@ -43,6 +43,7 @@ function getExtensionFilePath(extensionFile: string): string {
 }
 
 export class LaunchResolver implements vscode.DebugConfigurationProvider {
+    public launchedNodesPID:Array<number> = [];//gets filled when you do a launch request. It exists so you can stop the nodes again
     // tslint:disable-next-line: max-line-length
     public async resolveDebugConfigurationWithSubstitutedVariables(folder: vscode.WorkspaceFolder | undefined, config: requests.ILaunchRequest, token?: vscode.CancellationToken) {
         await fsp.access(config.target, fs.constants.R_OK);
@@ -125,6 +126,8 @@ export class LaunchResolver implements vscode.DebugConfigurationProvider {
                         throw (new Error(`Error from ${command}:\r\n ${err}`));
                     }
                 })
+                if(process.pid)
+                    this.launchedNodesPID.push(process.pid);
             }
         });
 
@@ -133,7 +136,12 @@ export class LaunchResolver implements vscode.DebugConfigurationProvider {
         // Return null as we have spawned new debug requests
         return null;
     }
-
+    
+    public stopLaunchedNodes() : void
+    {
+        this.launchedNodesPID.forEach(pid => child_process.exec(`kill $(ps -o pid= --ppid ${pid})`) );
+        this.launchedNodesPID = [];
+    }
 
     private generateLaunchRequest(nodeName: string, command: string, config: requests.ILaunchRequest): ILaunchRequest {
         let parsedArgs: shell_quote.ParseEntry[];
