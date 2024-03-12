@@ -73,6 +73,11 @@
                 "category": "ROS"
             },
             {
+                "command": "ros.stopLaunchedNodes",
+                "title": "Stop all launched ROS nodes",
+                "category": "ROS"
+            },
+            {
                 "command": "ros.rostest",
                 "title": "Run a ROS test file (rostest)",
                 "category": "ROS"

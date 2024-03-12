@@ -20,6 +20,7 @@ import URDFPreviewManager from "./urdfPreview/previewManager"
 import * as debug_manager from "./debugger/manager";
 import * as debug_utils from "./debugger/utils";
 import { registerRosShellTaskProvider } from "./build-tool/ros-shell";
+import { LaunchResolver } from "./debugger/configuration/resolvers/ros2/launch";
 
 /**
  * The sourced ROS environment.
@@ -55,6 +56,7 @@ export enum Commands {
     GetDebugSettings = "ros.getDebugSettings",
     Rosrun = "ros.rosrun",
     Roslaunch = "ros.roslaunch",
+    StopLaunchedNodes = "ros.stopLaunchedNodes",
     Rostest = "ros.rostest",
     Rosdep = "ros.rosdep",
     ShowCoreStatus = "ros.showCoreStatus",
@@ -155,6 +157,10 @@ export async function activate(context: vscode.ExtensionContext) {
             ensureErrorMessageOnException(() => {
                 return ros_cli.roslaunch(context);
             });
+        });
+        
+        vscode.commands.registerCommand(Commands.StopLaunchedNodes, () => {
+            LaunchResolver.stopLaunchedNodes();
         });
 
         vscode.commands.registerCommand(Commands.Rostest, () => {

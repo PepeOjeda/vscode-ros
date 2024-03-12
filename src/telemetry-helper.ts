@@ -8,16 +8,7 @@ import * as vscode_utils from "./vscode-utils";
 let reporterSingleton: TelemetryReporter;
 
 function getTelemetryReporter(): TelemetryReporter {
-    if (reporterSingleton) {
-        return reporterSingleton;
-    }
-
-    const extensionId = "ms-iot.vscode-ros";
-    const packageInfo = vscode_utils.getPackageInfo(extensionId);
-    if (packageInfo) {
-        reporterSingleton = new TelemetryReporter(packageInfo.name, packageInfo.version, packageInfo.aiKey);
-    }
-    return reporterSingleton;
+    return null;
 }
 
 enum TelemetryEvent {
