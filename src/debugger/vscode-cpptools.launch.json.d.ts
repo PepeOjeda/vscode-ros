@@ -3,7 +3,7 @@
 
 interface ICppdbgLaunchConfiguration {
     // properties required by vscode.DebugConfiguration with hard-coded values
-    type: "cppdbg";
+    type: string;
     request: "launch";
     name: string;
 
@@ -271,7 +271,7 @@ interface ICppdbgAttachConfiguration {
 
 interface ICppvsdbgLaunchConfiguration {
     // properties required by vscode.DebugConfiguration with hard-coded values
-    type: "cppvsdbg";
+    type: string;
     request: "launch";
     name: string;
 

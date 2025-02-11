@@ -1,15 +1,15 @@
 {
     "name": "vscode-ros-fork",
-    "version": "0.9.6",
+    "version": "0.9.7",
     "publisher": "ms-iot",
     "engines": {
         "vscode": "^1.69.0"
     },
     "author": {
-        "name": "Microsoft Corporation"
+        "name": "Pepe Ojeda"
     },
-    "displayName": "ROS",
-    "description": "Develop Robot Operating System (ROS) with Visual Studio Code.",
+    "displayName": "ROS-forked",
+    "description": "Fork of the official Microsoft ROS extension with better debugger configurations and additional commands.",
     "icon": "media/icon.png",
     "aiKey": "AIF-d9b70cd4-b9f9-4d70-929b-a071c400b217",
     "categories": [
@@ -27,13 +27,13 @@
         "robot"
     ],
     "license": "SEE LICENSE IN LICENSE",
-    "homepage": "https://github.com/ms-iot/vscode-ros",
+    "homepage": "https://github.com/PepeOjeda/vscode-ros",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ms-iot/vscode-ros"
+        "url": "https://github.com/PepeOjeda/vscode-ros"
     },
     "bugs": {
-        "url": "https://github.com/ms-iot/vscode-ros/issues"
+        "url": "https://github.com/PepeOjeda/vscode-ros/issues"
     },
     "preview": true,
     "main": "./dist/extension",
@@ -181,7 +181,13 @@
                         "properties": {
                             "target": {
                                 "type": "string",
-                                "description": "Absolute path to launch file",
+                                "description": "Either the absolute path to launch file, or '[pkg] [node name]'",
+                                "default": ""
+                            },
+                            "debugger":
+                            {
+                                "type": "string",
+                                "description": "Identifier of the backend debugger extension. Default is 'cppdbg' (Microsoft C/C++ extension).",
                                 "default": ""
                             },
                             "arguments": {
@@ -219,7 +225,7 @@
                             },
                             "attachDebugger": {
                                 "type": "array",
-                                "description": "A specific list of executables to just attach a debugger. Useful for large compostions with where only a few nodes need to be debugged",
+                                "description": "A specific list of executables to just attach a debugger. Useful for large compostions where only a few nodes need to be debugged",
                                 "default": ""
                             }
                         }
