@@ -118,7 +118,7 @@ export class LaunchResolver implements vscode.DebugConfigurationProvider {
 
         let commands = result.stdout.split(os.EOL);
         let outputOtherNodes = vscode.window.createOutputChannel(`Other ROS nodes`);
-        outputOtherNodes.show();
+        // outputOtherNodes.show();
         commands.forEach(async (command) => {
             if (!command || command =='') {
                return;
